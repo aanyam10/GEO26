@@ -22,6 +22,15 @@ You can also run:
 python3 -m http.server 8000
 ```
 
+## Run with Streamlit
+
+This repo also includes a small Streamlit wrapper around the same prototype.
+
+```bash
+pip install -r requirements.txt
+streamlit run streamlit_app.py
+```
+
 ## What is included
 
 - A paper-style landing screen with a `Begin` button
