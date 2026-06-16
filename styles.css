@@ -835,6 +835,25 @@ body.journey-started .hero-panel {
   min-height: 138px;
 }
 
+.field-display {
+  width: 100%;
+  min-height: 60px;
+  padding: 14px 16px;
+  border: 1px solid rgba(84, 56, 26, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 251, 243, 0.76);
+  color: var(--ink);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48);
+  white-space: pre-wrap;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+
+.field-display--tall {
+  min-height: 138px;
+}
+
 .memory-tools {
   display: grid;
   gap: 10px;

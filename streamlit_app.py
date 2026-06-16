@@ -63,7 +63,7 @@ def build_html() -> str:
         f"<script>{config_js.replace('</script>', '<\\/script>')}</script>",
     )
     html = html.replace(
-        '<script src="app.js?v=gm-demo-12"></script>',
+        '<script src="app.js?v=gm-demo-13"></script>',
         f"<script>{app_js.replace('</script>', '<\\/script>')}</script>",
     )
 

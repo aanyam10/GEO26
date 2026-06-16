@@ -824,7 +824,7 @@ function renderImage(stop) {
 
 function renderDestination() {
   const stop = destinations[currentIndex];
-  const notes = state.notes[stop.id] || {
+  const notes = {
     citation: stop.citation,
     info: stop.info,
   };
@@ -838,8 +838,8 @@ function renderDestination() {
   destinationSubtitle.textContent = stop.subtitle;
   renderImage(stop);
   imageLabel.textContent = stop.imageLabel;
-  citationText.value = notes.citation;
-  infoText.value = notes.info;
+  citationText.textContent = notes.citation;
+  infoText.textContent = notes.info;
   routeRibbon.textContent = map
     ? journeyStarted
       ? `Current stop: ${stop.name}`
@@ -888,12 +888,7 @@ function renderDestination() {
 }
 
 function persistNotes() {
-  const stop = destinations[currentIndex];
-  state.notes[stop.id] = {
-    citation: citationText.value,
-    info: infoText.value,
-  };
-  saveState();
+  // Displayed notes are fixed in code and are not editable in the viewer.
 }
 
 function animatePlaneBetween(startStop, endStop) {
@@ -1708,8 +1703,6 @@ function closePhotoModal() {
 beginButton.addEventListener("click", beginJourney);
 nextButton.addEventListener("click", moveToNextDestination);
 restartButton.addEventListener("click", restartJourney);
-citationText.addEventListener("input", persistNotes);
-infoText.addEventListener("input", persistNotes);
 activityButton.addEventListener("click", handleActivityOpen);
 saveMapKeyButton.addEventListener("click", saveMapsDemoKey);
 clearMapKeyButton.addEventListener("click", clearMapsDemoKey);
