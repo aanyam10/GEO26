@@ -16,10 +16,11 @@ const destinations = [
       "Pathak, Nanubhai, D., Lodrick, & O, D. (2026, May 31). Gujarat | History, Map, Population, & Facts. Encyclopedia Britannica. https://www.britannica.com/place/Gujarat",
     info:
       "Gujarat is located on the west coast of India and was the place that my dad was born in. Although he did enjoy his time here and all the memories he made, he knew that if he wanted better opportunities, he needed to get out into the world and study at an educational institution that would open more doors in the future. His ambitions led him to move out of his home and pursue dreams that would hopefully pay off one day.",
-    footerNote: "Explore the cricket memory to unlock the next destination.",
+    footerNote: "Open the cricket memory to unlock the next destination.",
     activity: {
       kind: "cricket",
       caption: "Play the cricket memory from Sherdi.",
+      openedNote: "Cricket memory opened. Continue when you're ready.",
       completedNote: "Cricket memory explored. Continue when you're ready.",
     },
   },
@@ -40,11 +41,12 @@ const destinations = [
       "Bird, T. (2022, February 25). Marseille: France's \"good natured\" city. https://www.bbc.com/travel/article/20220208-marseille-frances-good-natured-city",
     info:
       "Marseille is located in southern France along the coast of the Mediterranean Sea, near the mouth of the Rhone River. As the oldest city in the country, its culture is defined by maritime traditions, immigrant influences, and culinary heritage. My dad originally moved here to continue his education through a Master of Business Administration program, but even with a strong immigrant presence, he still had trouble finding people from India he could comfortably connect with because he knew Gujarati and English, but barely any French.",
-    footerNote: "Watch the dishwashing memory to unlock the next destination.",
+    footerNote: "Open the dishwashing memory to unlock the next destination.",
     activity: {
       kind: "dish",
       caption:
         "Open the dishwashing memory from Marseille.",
+      openedNote: "Dishwashing memory opened. Continue whenever you're ready.",
       completedNote: "Dishwashing memory complete. Continue when you're ready.",
     },
   },
@@ -69,6 +71,7 @@ const destinations = [
     activity: {
       kind: "london-eye",
       caption: "Open the London Eye POV memory and exit whenever you're ready.",
+      openedNote: "London Eye memory opened. Continue when you're ready.",
       completedNote: "London Eye memory explored. Continue when you're ready.",
     },
   },
@@ -89,10 +92,11 @@ const destinations = [
       "Lauritsen, J. (2024, September 5). How the Spoon and Cherry sculpture found a home in Minneapolis. CBS News. https://www.cbsnews.com/minnesota/news/spoon-and-cherry-minneapolis/",
     info:
       "Minnesota is located in the Upper Midwestern region of the United States and borders Canada. After a second expired visa, my dad visited India several years later to get married. From there, he and his wife moved to Minnesota for better job opportunities and the potential for making large amounts of money. Here, the immigration population was significantly less than the other places he had been, but with his wife, it felt better that he was not just by himself. Minnesota was also the birthplace of his AMAZING daughter.",
-    footerNote: "Complete the jigsaw memory to unlock the final destination.",
+    footerNote: "Open the jigsaw memory to unlock the final destination.",
     activity: {
       kind: "jigsaw",
       caption: "Complete the daughter photo jigsaw to move on.",
+      openedNote: "Jigsaw opened. Continue whenever you're ready.",
       completedNote: "Puzzle complete. The final stop is ready.",
     },
   },
@@ -118,6 +122,7 @@ const destinations = [
     activity: {
       kind: "photo",
       caption: "Open the family photo frame memory for the ending.",
+      openedNote: "Family photo opened. This is the end of the journey.",
       completedNote: "Family photo opened. This is the end of the journey.",
     },
   },
@@ -229,6 +234,7 @@ function createDefaultState() {
   return {
     notes: createDefaultNotes(),
     completedActivities: {},
+    openedActivities: {},
   };
 }
 
@@ -258,6 +264,7 @@ function normalizeState(saved, sourceKey) {
   const normalized = {
     notes: { ...fallback.notes },
     completedActivities: {},
+    openedActivities: {},
   };
 
   if (!saved || typeof saved !== "object") {
@@ -304,6 +311,19 @@ function normalizeState(saved, sourceKey) {
     });
   }
 
+  if (
+    saved.openedActivities &&
+    typeof saved.openedActivities === "object"
+  ) {
+    Object.entries(saved.openedActivities).forEach(([stopId, value]) => {
+      const resolvedId = resolveDestinationId(stopId);
+      if (!resolvedId) {
+        return;
+      }
+      normalized.openedActivities[resolvedId] = Boolean(value);
+    });
+  }
+
   return normalized;
 }
 
@@ -319,6 +339,7 @@ function loadState() {
       const normalized = normalizeState(JSON.parse(raw), key);
       if (key !== storageKey) {
         normalized.completedActivities = {};
+        normalized.openedActivities = {};
       }
       return normalized;
     } catch (error) {
@@ -771,6 +792,17 @@ function markStopActivityCompleted(stopId) {
   saveState();
 }
 
+function markStopActivityOpened(stopId) {
+  state.openedActivities[stopId] = true;
+  saveState();
+}
+
+function isStopUnlocked(stopId) {
+  return Boolean(
+    state.openedActivities?.[stopId] || state.completedActivities?.[stopId],
+  );
+}
+
 function renderImage(stop) {
   imageArt.dataset.theme = stop.theme;
   imageArt.classList.toggle("image-card__art--photo", Boolean(stop.imageSrc));
@@ -797,6 +829,7 @@ function renderDestination() {
     info: stop.info,
   };
   const isFinalStop = currentIndex === destinations.length - 1;
+  const unlocked = isStopUnlocked(stop.id);
   const completed = Boolean(state.completedActivities[stop.id]);
   const journeyStarted = document.body.classList.contains("journey-started");
 
@@ -823,7 +856,9 @@ function renderDestination() {
     activityCaption.textContent = stop.activity.caption;
     footerNote.textContent = completed
       ? stop.activity.completedNote || stop.footerNote
-      : stop.footerNote;
+      : unlocked
+        ? stop.activity.openedNote || "Activity opened. Continue when you're ready."
+        : stop.footerNote;
   } else {
     memoryTools.classList.add("hidden");
     activityButton.innerHTML = "";
@@ -833,7 +868,7 @@ function renderDestination() {
 
   if (isFinalStop) {
     nextButton.classList.add("hidden");
-  } else if (!stop.activity || completed) {
+  } else if (!stop.activity || unlocked) {
     nextButton.classList.remove("hidden");
     nextButton.textContent = "Next Destination";
   } else {
@@ -842,7 +877,7 @@ function renderDestination() {
 
   nextButton.classList.toggle(
     "journey-button--spotlight",
-    stop.id === "minneapolis" && completed && !isFinalStop,
+    stop.id === "minneapolis" && unlocked && !isFinalStop,
   );
 
   if (isFinalStop && journeyStarted) {
@@ -956,6 +991,7 @@ function restartJourney() {
 
   persistNotes();
   state.completedActivities = {};
+  state.openedActivities = {};
   saveState();
   closeAllModals();
   dishSceneComplete = false;
@@ -996,20 +1032,14 @@ function completeActivityIfEligible(kind) {
     return;
   }
 
-  if (kind === "cricket") {
-    markStopActivityCompleted(stop.id);
-  } else if (kind === "dish") {
-    if (dishSceneComplete || state.completedActivities[stop.id]) {
+  if (kind === "dish") {
+    if (dishSceneComplete) {
       markStopActivityCompleted(stop.id);
     }
-  } else if (kind === "london-eye") {
-    markStopActivityCompleted(stop.id);
   } else if (kind === "jigsaw") {
     if (isJigsawSolved(jigsawTiles)) {
       markStopActivityCompleted(stop.id);
     }
-  } else if (kind === "photo") {
-    markStopActivityCompleted(stop.id);
   }
 
   renderDestination();
@@ -1020,6 +1050,16 @@ function handleActivityOpen() {
   if (!stop.activity) {
     return;
   }
+
+  markStopActivityOpened(stop.id);
+  if (
+    stop.activity.kind === "cricket" ||
+    stop.activity.kind === "london-eye" ||
+    stop.activity.kind === "photo"
+  ) {
+    markStopActivityCompleted(stop.id);
+  }
+  renderDestination();
 
   if (stop.activity.kind === "cricket") {
     openCricketModal();
