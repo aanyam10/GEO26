@@ -55,7 +55,7 @@ def build_html() -> str:
     )
 
     html = html.replace(
-        '<link rel="stylesheet" href="styles.css?v=gm-demo-11" />',
+        '<link rel="stylesheet" href="styles.css?v=gm-demo-12" />',
         f"<style>{css}</style>",
     )
     html = html.replace(
