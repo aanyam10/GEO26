@@ -1305,125 +1305,200 @@ function closeDishModal() {
 
 function drawLondonScene(progressSeconds) {
   const t = progressSeconds;
-  const pan = Math.sin(t * 0.3) * 18;
-  const cloudDrift = (t * 22) % (londonCanvas.width + 220);
+  const rise = Math.min(t * 18, 88);
+  const sway = Math.sin(t * 0.72) * 5;
+  const cloudDrift = (t * 18) % (londonCanvas.width + 220);
+  const skylineDrop = rise * 0.52;
+  const windowX = 74;
+  const windowY = 22;
+  const windowWidth = 472;
+  const windowHeight = 208;
+  const horizonY = 170 + skylineDrop;
 
   londonContext.clearRect(0, 0, londonCanvas.width, londonCanvas.height);
 
-  const sky = londonContext.createLinearGradient(0, 0, 0, londonCanvas.height);
-  sky.addColorStop(0, "#93b7d9");
-  sky.addColorStop(0.58, "#dce7f0");
-  sky.addColorStop(1, "#f2e7d3");
-  londonContext.fillStyle = sky;
+  const cabin = londonContext.createLinearGradient(0, 0, 0, londonCanvas.height);
+  cabin.addColorStop(0, "#e8dcc8");
+  cabin.addColorStop(0.58, "#d3bea0");
+  cabin.addColorStop(1, "#8c6849");
+  londonContext.fillStyle = cabin;
   londonContext.fillRect(0, 0, londonCanvas.width, londonCanvas.height);
 
-  londonContext.fillStyle = "rgba(255, 255, 255, 0.7)";
+  londonContext.save();
+  londonContext.beginPath();
+  londonContext.roundRect(windowX, windowY, windowWidth, windowHeight, 84);
+  londonContext.clip();
+
+  const sky = londonContext.createLinearGradient(0, windowY, 0, windowY + windowHeight);
+  sky.addColorStop(0, "#8fb7db");
+  sky.addColorStop(0.54, "#dfe9f2");
+  sky.addColorStop(1, "#f0dfc8");
+  londonContext.fillStyle = sky;
+  londonContext.fillRect(windowX, windowY, windowWidth, windowHeight);
+
+  londonContext.fillStyle = "rgba(255, 238, 206, 0.38)";
+  londonContext.beginPath();
+  londonContext.arc(455, 62, 38, 0, Math.PI * 2);
+  londonContext.fill();
+
+  londonContext.fillStyle = "rgba(255, 255, 255, 0.72)";
   for (let index = 0; index < 4; index += 1) {
-    const x = ((cloudDrift + index * 170) % (londonCanvas.width + 220)) - 110;
-    const y = 36 + index * 18;
+    const x = ((cloudDrift + index * 168) % (windowWidth + 180)) + windowX - 100;
+    const y = 44 + index * 20 - rise * 0.08;
     londonContext.beginPath();
-    londonContext.arc(x, y, 18, 0, Math.PI * 2);
-    londonContext.arc(x + 18, y - 8, 24, 0, Math.PI * 2);
-    londonContext.arc(x + 42, y, 18, 0, Math.PI * 2);
+    londonContext.arc(x, y, 16, 0, Math.PI * 2);
+    londonContext.arc(x + 18, y - 7, 22, 0, Math.PI * 2);
+    londonContext.arc(x + 38, y, 16, 0, Math.PI * 2);
     londonContext.fill();
   }
 
-  londonContext.fillStyle = "#8fb0c2";
-  londonContext.fillRect(0, 188, londonCanvas.width, 92);
-  londonContext.fillStyle = "#6e93aa";
-  londonContext.fillRect(0, 208, londonCanvas.width, 72);
+  londonContext.fillStyle = "#adc7d6";
+  londonContext.fillRect(windowX, horizonY - 22, windowWidth, 48);
+  londonContext.fillStyle = "#82a8bb";
+  londonContext.fillRect(windowX, horizonY + 8, windowWidth, 54);
+  londonContext.fillStyle = "rgba(255, 255, 255, 0.2)";
+  londonContext.fillRect(windowX, horizonY + 10, windowWidth, 3);
 
   londonContext.save();
-  londonContext.translate(pan, 0);
-  londonContext.fillStyle = "#6c7888";
-  const buildingXs = [40, 94, 148, 218, 286, 360, 422, 500];
-  const buildingHeights = [44, 56, 62, 48, 72, 58, 46, 52];
-  buildingXs.forEach((x, index) => {
-    const height = buildingHeights[index];
-    londonContext.fillRect(x, 156 - height, 34 + (index % 3) * 8, height);
-  });
-
-  londonContext.strokeStyle = "#d8e5ee";
-  londonContext.lineWidth = 5;
+  londonContext.translate(sway, 0);
+  londonContext.strokeStyle = "rgba(219, 231, 239, 0.84)";
+  londonContext.lineWidth = 4;
   londonContext.beginPath();
-  londonContext.arc(122, 122, 50, 0, Math.PI * 2);
+  londonContext.arc(150, horizonY - 44, 42, 0, Math.PI * 2);
   londonContext.stroke();
-  londonContext.lineWidth = 2;
+  londonContext.lineWidth = 1.8;
   for (let spoke = 0; spoke < 8; spoke += 1) {
     const angle = (Math.PI * 2 * spoke) / 8;
     londonContext.beginPath();
-    londonContext.moveTo(122, 122);
-    londonContext.lineTo(122 + Math.cos(angle) * 50, 122 + Math.sin(angle) * 50);
+    londonContext.moveTo(150, horizonY - 44);
+    londonContext.lineTo(
+      150 + Math.cos(angle) * 42,
+      horizonY - 44 + Math.sin(angle) * 42,
+    );
     londonContext.stroke();
   }
-  londonContext.fillStyle = "#c78d56";
-  londonContext.fillRect(116, 166, 12, 28);
-  londonContext.fillRect(98, 194, 48, 6);
+  londonContext.fillStyle = "#c6935f";
+  londonContext.fillRect(145, horizonY - 2, 10, 28);
+  londonContext.fillRect(129, horizonY + 22, 42, 5);
 
-  londonContext.fillStyle = "#c9b58b";
-  londonContext.fillRect(262, 84, 54, 96);
-  londonContext.fillStyle = "#a98545";
-  londonContext.fillRect(279, 56, 20, 28);
+  londonContext.fillStyle = "#697787";
+  const buildingXs = [96, 132, 188, 224, 272, 326, 372, 458];
+  const buildingWidths = [26, 18, 34, 28, 30, 26, 38, 20];
+  const buildingHeights = [44, 28, 56, 42, 64, 46, 52, 92];
+  buildingXs.forEach((x, index) => {
+    const width = buildingWidths[index];
+    const height = buildingHeights[index];
+    londonContext.fillRect(x, horizonY - height, width, height);
+  });
+
+  londonContext.fillStyle = "#b89a6b";
+  londonContext.fillRect(454, horizonY - 92, 20, 92);
+  londonContext.fillStyle = "#9d7a47";
+  londonContext.fillRect(459, horizonY - 120, 10, 28);
   londonContext.beginPath();
-  londonContext.moveTo(289, 38);
-  londonContext.lineTo(301, 56);
-  londonContext.lineTo(277, 56);
+  londonContext.moveTo(464, horizonY - 138);
+  londonContext.lineTo(473, horizonY - 120);
+  londonContext.lineTo(455, horizonY - 120);
   londonContext.closePath();
   londonContext.fill();
-  londonContext.fillStyle = "#f5edd7";
+  londonContext.fillStyle = "#f6ecd7";
   londonContext.beginPath();
-  londonContext.arc(289, 122, 12, 0, Math.PI * 2);
+  londonContext.arc(464, horizonY - 52, 10, 0, Math.PI * 2);
   londonContext.fill();
   londonContext.strokeStyle = "#765328";
-  londonContext.lineWidth = 2.2;
+  londonContext.lineWidth = 2;
   londonContext.beginPath();
-  londonContext.moveTo(289, 122);
-  londonContext.lineTo(289, 115);
-  londonContext.moveTo(289, 122);
-  londonContext.lineTo(297, 126);
+  londonContext.moveTo(464, horizonY - 52);
+  londonContext.lineTo(464, horizonY - 60);
+  londonContext.moveTo(464, horizonY - 52);
+  londonContext.lineTo(471, horizonY - 48);
+  londonContext.stroke();
+
+  londonContext.strokeStyle = "rgba(255, 255, 255, 0.32)";
+  londonContext.lineWidth = 3;
+  londonContext.beginPath();
+  londonContext.moveTo(120, 38);
+  londonContext.lineTo(190, 108);
+  londonContext.moveTo(504, 28);
+  londonContext.lineTo(448, 118);
   londonContext.stroke();
   londonContext.restore();
 
-  londonContext.fillStyle = "#d5c6af";
-  londonContext.fillRect(0, 172, londonCanvas.width, 12);
+  londonContext.restore();
 
-  londonContext.strokeStyle = "rgba(90, 69, 52, 0.92)";
+  const windowGlass = londonContext.createLinearGradient(0, windowY, 0, windowY + windowHeight);
+  windowGlass.addColorStop(0, "rgba(255, 255, 255, 0.22)");
+  windowGlass.addColorStop(0.4, "rgba(255, 255, 255, 0.05)");
+  windowGlass.addColorStop(1, "rgba(255, 248, 238, 0.12)");
+  londonContext.fillStyle = windowGlass;
+  londonContext.beginPath();
+  londonContext.roundRect(windowX, windowY, windowWidth, windowHeight, 84);
+  londonContext.fill();
+
+  londonContext.strokeStyle = "rgba(105, 72, 43, 0.92)";
   londonContext.lineWidth = 16;
   londonContext.beginPath();
-  londonContext.moveTo(34, 18);
-  londonContext.lineTo(34, londonCanvas.height - 24);
-  londonContext.lineTo(londonCanvas.width - 34, londonCanvas.height - 24);
-  londonContext.lineTo(londonCanvas.width - 34, 18);
+  londonContext.roundRect(windowX, windowY, windowWidth, windowHeight, 84);
   londonContext.stroke();
 
-  londonContext.strokeStyle = "rgba(90, 69, 52, 0.72)";
-  londonContext.lineWidth = 4;
+  londonContext.strokeStyle = "rgba(246, 233, 214, 0.72)";
+  londonContext.lineWidth = 5;
   londonContext.beginPath();
-  londonContext.moveTo(londonCanvas.width / 2, 10);
-  londonContext.lineTo(londonCanvas.width / 2, londonCanvas.height - 16);
+  londonContext.roundRect(
+    windowX + 8,
+    windowY + 8,
+    windowWidth - 16,
+    windowHeight - 16,
+    74,
+  );
   londonContext.stroke();
 
-  londonContext.fillStyle = "rgba(54, 39, 31, 0.72)";
-  londonContext.beginPath();
-  londonContext.arc(124, 236, 18, 0, Math.PI * 2);
-  londonContext.fill();
-  londonContext.fillRect(110, 252, 28, 22);
-  londonContext.fillRect(102, 264, 18, 12);
-  londonContext.fillRect(138, 264, 18, 12);
-
-  londonContext.beginPath();
-  londonContext.arc(486, 232, 16, 0, Math.PI * 2);
-  londonContext.fill();
-  londonContext.fillRect(474, 246, 24, 24);
-  londonContext.fillRect(466, 260, 16, 12);
-  londonContext.fillRect(494, 260, 16, 12);
-
-  londonContext.strokeStyle = "rgba(255, 255, 255, 0.24)";
+  londonContext.strokeStyle = "rgba(109, 79, 49, 0.72)";
   londonContext.lineWidth = 6;
   londonContext.beginPath();
-  londonContext.moveTo(70, 40);
-  londonContext.lineTo(146, 116);
+  londonContext.moveTo(windowX + windowWidth / 2, 24);
+  londonContext.lineTo(windowX + windowWidth / 2, 228);
   londonContext.stroke();
+
+  londonContext.strokeStyle = "rgba(255, 255, 255, 0.26)";
+  londonContext.lineWidth = 5;
+  londonContext.beginPath();
+  londonContext.moveTo(126, 34);
+  londonContext.lineTo(202, 120);
+  londonContext.moveTo(246, 28);
+  londonContext.lineTo(304, 116);
+  londonContext.stroke();
+
+  londonContext.fillStyle = "#b28a61";
+  londonContext.beginPath();
+  londonContext.roundRect(96, 214, 428, 42, 18);
+  londonContext.fill();
+  londonContext.fillStyle = "#8a6546";
+  londonContext.fillRect(96, 244, 428, 14);
+  londonContext.fillStyle = "#67472e";
+  londonContext.fillRect(96, 256, 428, 24);
+
+  londonContext.fillStyle = "rgba(50, 34, 24, 0.8)";
+  [
+    { x: 162, y: 224, r: 17 },
+    { x: 224, y: 230, r: 14 },
+    { x: 398, y: 226, r: 16 },
+    { x: 454, y: 232, r: 13 },
+  ].forEach((figure) => {
+    londonContext.beginPath();
+    londonContext.arc(figure.x, figure.y, figure.r, 0, Math.PI * 2);
+    londonContext.fill();
+  });
+  londonContext.fillRect(146, 240, 34, 26);
+  londonContext.fillRect(212, 243, 28, 22);
+  londonContext.fillRect(384, 241, 32, 24);
+  londonContext.fillRect(444, 246, 22, 18);
+
+  londonContext.fillStyle = "rgba(255, 255, 255, 0.16)";
+  londonContext.beginPath();
+  londonContext.arc(164, 216, 14, Math.PI * 1.08, Math.PI * 1.95);
+  londonContext.arc(400, 219, 14, Math.PI * 1.08, Math.PI * 1.95);
+  londonContext.fill();
 }
 
 function londonLoop(timestamp) {
@@ -1438,7 +1513,8 @@ function londonLoop(timestamp) {
 
 function openLondonModal() {
   londonModal.classList.remove("hidden");
-  londonStatus.textContent = "POV London Eye memory. Exit whenever you're ready.";
+  londonStatus.textContent =
+    "You are inside the London Eye capsule as it rises over the city.";
   londonStartTime = 0;
   window.cancelAnimationFrame(londonAnimationFrame);
   londonAnimationFrame = window.requestAnimationFrame(londonLoop);

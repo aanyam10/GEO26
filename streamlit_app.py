@@ -55,7 +55,7 @@ def build_html() -> str:
     )
 
     html = html.replace(
-        '<link rel="stylesheet" href="styles.css?v=gm-demo-10" />',
+        '<link rel="stylesheet" href="styles.css?v=gm-demo-11" />',
         f"<style>{css}</style>",
     )
     html = html.replace(
@@ -63,7 +63,7 @@ def build_html() -> str:
         f"<script>{config_js.replace('</script>', '<\\/script>')}</script>",
     )
     html = html.replace(
-        '<script src="app.js?v=gm-demo-10"></script>',
+        '<script src="app.js?v=gm-demo-11"></script>',
         f"<script>{app_js.replace('</script>', '<\\/script>')}</script>",
     )
 
@@ -76,12 +76,18 @@ st.markdown(
     """
     <style>
       .block-container {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
+        padding-top: 0.45rem;
+        padding-bottom: 0.5rem;
         max-width: 1400px;
       }
       [data-testid="stHeader"] {
         background: transparent;
+      }
+      h1 {
+        margin-bottom: 0.1rem;
+      }
+      [data-testid="stCaptionContainer"] {
+        margin-bottom: 0.45rem;
       }
     </style>
     """,
@@ -91,4 +97,4 @@ st.markdown(
 st.title("Geo 26")
 st.caption("Interactive Streamlit prototype of the immigration journey map.")
 
-components.html(build_html(), height=1850, scrolling=True)
+components.html(build_html(), height=1560, scrolling=True)
