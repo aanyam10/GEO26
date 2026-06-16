@@ -15,7 +15,7 @@ const destinations = [
     citation:
       "Pathak, Nanubhai, D., Lodrick, & O, D. (2026, May 31). Gujarat | History, Map, Population, & Facts. Encyclopedia Britannica. https://www.britannica.com/place/Gujarat",
     info:
-      "Gujarat is located on the west coast of India and was the place that my dad was born in. Although he did enjoy his time here and all the memories he made, he knew that if he wanted better opportunities, he needed to get out into the world and study at an educational institution that would open more doors in the future. His ambitions led him to move out of his home and pursue dreams that would hopefully pay off one day.",
+      "Gujarat is located on the West coast of India and was the place that my dad was born in. Although, he did enjoy his time here and all the memories he made. He knew that if he wanted better opportunities, he needed to get out into the world and at an educational institution that would give him better opportunities in the future. His ambitions led him to move out of his home and pursue dreams that would hopefully pay off one day.",
     footerNote: "Open the cricket memory to unlock the next destination.",
     activity: {
       kind: "cricket",
@@ -40,7 +40,7 @@ const destinations = [
     citation:
       "Bird, T. (2022, February 25). Marseille: France's \"good natured\" city. https://www.bbc.com/travel/article/20220208-marseille-frances-good-natured-city",
     info:
-      "Marseille is located in southern France along the coast of the Mediterranean Sea, near the mouth of the Rhone River. As the oldest city in the country, its culture is defined by maritime traditions, immigrant influences, and culinary heritage. My dad originally moved here to continue his education through a Master of Business Administration program, but even with a strong immigrant presence, he still had trouble finding people from India he could comfortably connect with because he knew Gujarati and English, but barely any French.",
+      "Marseille is located in southern France along the coast of the Mediterranean Sea, positioned near the mouth of the Rhône River. As the oldest city in the country, its culture is defined by a variety of maritime traditions, immigrant influences, and artistic highlights by its famous hip-hop and culinary heritage. My dad originally moved here to further enhance his education by a Masters Degree in Business Administration. Here, he also felt that even though the immigrant influence in the area was heavy, he was yet to find people from India that he could talk to since he was getting his degree in English, knew Gujarati but knew barely any French.",
     footerNote: "Open the dishwashing memory to unlock the next destination.",
     activity: {
       kind: "dish",
@@ -64,9 +64,9 @@ const destinations = [
     imageLabel: "London skyline reference image.",
     imageHint: "City reference",
     citation:
-      "Guidelines To Britain. (2019, March 19). 10 Facts about Big Ben in London. Guidelines to Britain. https://guidelinestobritain.com/attractions/facts-about-big-ben-in-london/",
+      "Guidelines To Britain. (2019, March 19). 10 Facts about Big Ben in London - Guidelines to Britain. Guidelines to Britain. https://guidelinestobritain.com/attractions/facts-about-big-ben-in-london/",
     info:
-      "London is situated in southeastern England, with iconic royal heritage, museums, historic landmarks, and a legendary theater district. After one expired visa, my dad later moved to London after graduating to get a job that was more in his field. He was able to make friends since communicating became easier and he could meet people from different parts of India, even though the culture changes drastically depending on where in India you are. It still gave him the connections he needed without missing family too much.",
+      "London is situated in southeastern England, its iconic royal heritage with great global influence, boasting world-class museums, historic landmarks, and a legendary theater district. However, one expired visa later he moved to London, England after graduating to get a job that is somewhat in his field. He was able to make friends since communicating became easier and find friends from different parts of India that he could connect with even though the culture changes drastically depending on where in India you are. It still gave him the connections that he needed without missing family too much.",
     footerNote: "Open the London Eye memory to unlock the next destination.",
     activity: {
       kind: "london-eye",
@@ -91,7 +91,7 @@ const destinations = [
     citation:
       "Lauritsen, J. (2024, September 5). How the Spoon and Cherry sculpture found a home in Minneapolis. CBS News. https://www.cbsnews.com/minnesota/news/spoon-and-cherry-minneapolis/",
     info:
-      "Minnesota is located in the Upper Midwestern region of the United States and borders Canada. After a second expired visa, my dad visited India several years later to get married. From there, he and his wife moved to Minnesota for better job opportunities and the potential for making large amounts of money. Here, the immigration population was significantly less than the other places he had been, but with his wife, it felt better that he was not just by himself. Minnesota was also the birthplace of his AMAZING daughter.",
+      "Minnesota is located in the Upper Midwestern region of the United States and borders Canada. Second expired visa later, he visited India several years later to get married. From there, he and his wife moved to Minnesota for better job opportunities and the potential for making large amounts of money. Here, the immigration population was significantly less than the other places he had been. But with his wife, it felt better that there was at least he wasn't just himself. Minnesota was also the birthplace of his AMAZING daughter.",
     footerNote: "Open the jigsaw memory to unlock the final destination.",
     activity: {
       kind: "jigsaw",
@@ -116,7 +116,7 @@ const destinations = [
     citation:
       "Piercey, J. (2025, July 8). Summer music series takes over Roos Island in Kitchener. CityNews Kitchener. https://kitchener.citynews.ca/2025/07/08/summer-music-series-takes-over-roos-island-in-kitchener/",
     info:
-      "Kitchener is located in southwestern Ontario, positioned about 100 kilometers west of Toronto within the booming Waterloo Region. Its unique culture balances deep German roots and is celebrated annually through the world-famous Kitchener-Waterloo Oktoberfest. This was the final place of uncertainty my dad faced when he moved to Canada. In the background of his life, his siblings also moved to Ontario and closer to family after years of separation. This made him feel more at home since he always believed that there is no such thing as a favorite place but favorite people. Anywhere those people are has become his favorite place.",
+      "Kitchener is located in southwestern Ontario, positioned about 100 kilometers west of Toronto within the booming Waterloo Region. Its unique culture beautifully balances its deep German roots and is celebrated annually through the world-famous Kitchener-Waterloo Oktoberfest. This was the final place of uncertainty my dad faced, he moved to Canada. In the background of his life, his siblings moved to Ontario and also moved here to be closer with his family after years of separation. This made him feel more at home since he always believed that there is no such thing as a favorite place but favorite people. Anywhere those people have become my favorite place.",
     footerNote:
       "Journey complete. Open the family photo memory or restart the journey from the end screen.",
     activity: {
