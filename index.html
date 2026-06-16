@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Geo 26 | Immigration Journey</title>
+    <link rel="stylesheet" href="styles.css?v=gm-demo-10" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <div class="map-layout" id="map-layout">
+        <section class="map-panel">
+          <div class="map-stage" id="map-stage">
+            <div id="map" aria-label="Journey map"></div>
+            <div class="map-paper"></div>
+            <div class="map-border"></div>
+            <div class="map-bolt map-bolt--top-left" aria-hidden="true"></div>
+            <div class="map-bolt map-bolt--top-right" aria-hidden="true"></div>
+            <div class="map-bolt map-bolt--bottom-left" aria-hidden="true"></div>
+            <div class="map-bolt map-bolt--bottom-right" aria-hidden="true"></div>
+            <div class="map-title">Map of the World</div>
+            <div class="map-compass" aria-hidden="true">
+              <span class="map-compass__north">N</span>
+              <span class="map-compass__east">E</span>
+              <span class="map-compass__south">S</span>
+              <span class="map-compass__west">W</span>
+              <span class="map-compass__rose"></span>
+            </div>
+            <div class="map-legend" aria-hidden="true">
+              <p class="map-legend__title">Legend</p>
+              <div class="map-legend__item">
+                <span class="map-legend__pin"></span>
+                <span>Current location</span>
+              </div>
+              <div class="map-legend__item">
+                <span class="map-legend__plane">✈</span>
+                <span>Journey route</span>
+              </div>
+            </div>
+            <div class="map-scale" aria-hidden="true">
+              <span class="map-scale__bar"></span>
+              <span class="map-scale__label">0 - 2,500 km</span>
+            </div>
+            <div class="map-source">Source: Aanya Mendapara</div>
+            <div class="map-setup hidden" id="map-setup">
+              <div class="map-setup__card">
+                <p class="eyebrow">Google Maps Demo Mode</p>
+                <h3>Free prototype key needed</h3>
+                <p class="map-setup__message" id="map-setup-message">
+                  Paste a free Google Maps Demo Key to activate the map in this
+                  prototype.
+                </p>
+                <label class="map-setup__field">
+                  <span>Maps Demo Key</span>
+                  <input
+                    id="map-key-input"
+                    type="text"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="Paste your demo key here"
+                  />
+                </label>
+                <div class="map-setup__actions">
+                  <button
+                    id="save-map-key"
+                    class="journey-button"
+                    type="button"
+                    onclick="window.__geo26ApplyKey && window.__geo26ApplyKey()"
+                  >
+                    Use Google Maps
+                  </button>
+                  <button
+                    id="clear-map-key"
+                    class="map-setup__clear"
+                    type="button"
+                    onclick="window.__geo26ClearKey && window.__geo26ClearKey()"
+                  >
+                    Clear Key
+                  </button>
+                  <a
+                    class="map-setup__link"
+                    href="https://developers.google.com/maps/documentation/javascript/demo-key"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    How to get one
+                  </a>
+                </div>
+                <p class="map-setup__hint">
+                  Stored only in this browser on this computer.
+                </p>
+              </div>
+            </div>
+            <div class="route-ribbon" id="route-ribbon">
+              A travel journal map of my dad's journey
+            </div>
+          </div>
+        </section>
+
+        <section class="info-panel" id="info-panel">
+          <div class="panel-top">
+            <p class="eyebrow" id="step-count">Stop 1 of 5</p>
+            <h2 id="destination-name">Sherdi, Gujarat, India</h2>
+            <p class="destination-subtitle" id="destination-subtitle">
+              The journey begins in Sherdi, Gujarat, where my dad was born and
+              where this story starts.
+            </p>
+          </div>
+
+          <div class="image-card">
+            <div class="image-card__art" id="image-art" data-theme="sherdi">
+              <span class="art-location">Sherdi, Gujarat, India</span>
+              <span class="art-hint">Reference image</span>
+            </div>
+            <div class="image-card__label">
+              <span>Image</span>
+              <p id="image-label">
+                Laxmi Vilas Palace image for the Sherdi and Gujarat introduction.
+              </p>
+            </div>
+          </div>
+
+          <label class="field-group">
+            <span>Citation</span>
+            <textarea id="citation-text" class="field-input" spellcheck="false"></textarea>
+          </label>
+
+          <label class="field-group field-group--grow">
+            <span>Information</span>
+            <textarea
+              id="info-text"
+              class="field-input field-input--tall"
+              spellcheck="true"
+            ></textarea>
+          </label>
+
+          <div class="memory-tools" id="memory-tools">
+            <button id="activity-button" class="activity-button" type="button"></button>
+            <p class="activity-caption" id="activity-caption"></p>
+          </div>
+
+          <div class="panel-footer">
+            <p class="footer-note" id="footer-note">
+              Explore the memory at this stop to unlock the next destination.
+            </p>
+            <button id="next-button" class="journey-button hidden" type="button">
+              Next Destination
+            </button>
+            <button id="restart-button" class="secondary-button hidden" type="button">
+              Restart Journey
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <section class="hero-panel" id="hero-panel">
+        <div class="hero-card">
+          <p class="eyebrow">Final Geography Assignment</p>
+          <h1>My Dad's Immigration Journey</h1>
+          <p class="hero-description">
+            Start on a Google world map set on a wooden-table style layout, then
+            follow the route from Sherdi to Marseille, London, Minneapolis, and
+            Kitchener with interactive memory stops.
+          </p>
+        </div>
+        <button id="begin-button" class="journey-button begin-button" type="button">
+          Begin
+        </button>
+      </section>
+    </div>
+
+    <div class="modal hidden" id="cricket-modal" role="dialog" aria-modal="true">
+      <div class="modal-card modal-card--wide">
+        <button class="modal-close" data-close="cricket" type="button">Exit</button>
+        <div class="modal-header">
+          <p class="eyebrow">Memory Activity</p>
+          <h3>Cricket Break</h3>
+          <p class="modal-description">
+            Information: While growing up in India, he would commonly play
+            cricket with his friends. He played on his university team all four
+            years there and also played field hockey and volleyball.
+          </p>
+        </div>
+        <div class="game-shell">
+          <canvas id="cricket-canvas" width="620" height="280"></canvas>
+          <div class="game-details">
+            <p>Click the game or press the space bar to swing.</p>
+            <p id="cricket-score">Score: 0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hidden" id="dish-modal" role="dialog" aria-modal="true">
+      <div class="modal-card">
+        <button class="modal-close" data-close="dish" type="button">Exit</button>
+        <div class="modal-header">
+          <p class="eyebrow">Memory Activity</p>
+          <h3>Restaurant Dish Shift</h3>
+          <p class="modal-description">
+            Information: While in Marseille, his messy French communication
+            skills made it difficult to get a job, which led him to dishwashing
+            work in restaurants across the city.
+          </p>
+        </div>
+        <div class="video-shell">
+          <canvas id="dish-canvas" width="620" height="280"></canvas>
+          <div class="video-progress">
+            <div id="dish-progress-bar"></div>
+          </div>
+          <p id="dish-status">10-second cartoony POV dishwashing scene.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hidden" id="london-modal" role="dialog" aria-modal="true">
+      <div class="modal-card">
+        <button class="modal-close" data-close="london-eye" type="button">Exit</button>
+        <div class="modal-header">
+          <p class="eyebrow">Memory Activity</p>
+          <h3>London Eye POV</h3>
+          <p class="modal-description">
+            Information: A POV memory of walking through the London Eye and
+            looking out the window with friends. You can exit at any time.
+          </p>
+        </div>
+        <div class="london-shell">
+          <canvas id="london-canvas" width="620" height="280"></canvas>
+          <p id="london-status">POV London Eye memory. Exit whenever you're ready.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hidden" id="jigsaw-modal" role="dialog" aria-modal="true">
+      <div class="modal-card modal-card--wide">
+        <button class="modal-close" data-close="jigsaw" type="button">Exit</button>
+        <div class="modal-header">
+          <p class="eyebrow">Memory Activity</p>
+          <h3>Minneapolis Jigsaw</h3>
+          <p class="modal-description">
+            Information: This is a photo of his daughter. While living there,
+            he and his wife were still thinking about what the future would
+            look like and whether immigration plans would fully work out.
+          </p>
+        </div>
+        <div class="jigsaw-shell">
+          <div class="jigsaw-reference">
+            <p>Match the pieces to complete the image and unlock the next stop.</p>
+            <img
+              id="jigsaw-reference-image"
+              src="assets/minneapolis-puzzle-photo.png"
+              alt="Baby photo puzzle reference"
+            />
+          </div>
+          <div class="jigsaw-play">
+            <div
+              class="jigsaw-complete-banner hidden"
+              id="jigsaw-complete-banner"
+              role="status"
+              aria-atomic="true"
+            >
+              <span class="jigsaw-complete-banner__icon" aria-hidden="true">✓</span>
+              <div class="jigsaw-complete-banner__text-block">
+                <p class="jigsaw-complete-banner__title">Puzzle Complete!</p>
+                <p class="jigsaw-complete-banner__text">
+                  Next destination unlocked. Press Continue to head to Kitchener.
+                </p>
+              </div>
+            </div>
+            <div class="jigsaw-board" id="jigsaw-board" aria-label="Jigsaw puzzle board"></div>
+            <p id="jigsaw-status">Swap two tiles at a time until the picture is complete.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hidden" id="photo-modal" role="dialog" aria-modal="true">
+      <div class="modal-card">
+        <button class="modal-close" data-close="photo" type="button">Exit</button>
+        <div class="modal-header">
+          <p class="eyebrow">Memory Activity</p>
+          <h3>Family Photo Frame</h3>
+          <p class="modal-description">
+            Information: Even after surviving several years in places he often
+            felt homesick, he and his family finally immigrated to Kitchener,
+            Ontario while always making sure his culture followed them
+            everywhere they went. This was where his daughter spent most of her
+            life and where his son was born.
+          </p>
+        </div>
+        <div class="photo-shell">
+          <img
+            id="photo-frame-image"
+            src="assets/kitchener-family.png"
+            alt="Family photo"
+          />
+        </div>
+      </div>
+    </div>
+
+    <script src="config.js?v=gm-demo-1"></script>
+    <script src="app.js?v=gm-demo-10"></script>
+  </body>
+</html>
