@@ -170,7 +170,6 @@ const stepCount = document.getElementById("step-count");
 const destinationName = document.getElementById("destination-name");
 const destinationSubtitle = document.getElementById("destination-subtitle");
 const imageArt = document.getElementById("image-art");
-const imageLabel = document.getElementById("image-label");
 const citationText = document.getElementById("citation-text");
 const infoText = document.getElementById("info-text");
 const footerNote = document.getElementById("footer-note");
@@ -810,16 +809,11 @@ function renderImage(stop) {
   if (stop.imageSrc) {
     imageArt.innerHTML = `
       <img class="image-card__photo" src="${stop.imageSrc}" alt="${stop.imageAlt || stop.name}" />
-      <span class="art-location">${stop.name}</span>
-      <span class="art-hint">${stop.imageHint || "Reference image"}</span>
     `;
     return;
   }
 
-  imageArt.innerHTML = `
-    <span class="art-location">${stop.name}</span>
-    <span class="art-hint">${stop.imageHint || "Image placeholder"}</span>
-  `;
+  imageArt.innerHTML = "";
 }
 
 function renderDestination() {
@@ -837,7 +831,6 @@ function renderDestination() {
   destinationName.textContent = stop.name;
   destinationSubtitle.textContent = stop.subtitle;
   renderImage(stop);
-  imageLabel.textContent = stop.imageLabel;
   citationText.textContent = notes.citation;
   infoText.textContent = notes.info;
   routeRibbon.textContent = map
@@ -1561,7 +1554,7 @@ function closeLondonModal() {
 }
 
 function createSolvedJigsawTiles() {
-  return Array.from({ length: 9 }, (_, index) => index);
+  return Array.from({ length: 4 }, (_, index) => index);
 }
 
 function shuffleTiles(tiles) {
@@ -1584,15 +1577,15 @@ function createJigsawTiles() {
 function isJigsawSolved(tiles) {
   return (
     Array.isArray(tiles) &&
-    tiles.length === 9 &&
+    tiles.length === 4 &&
     tiles.every((value, index) => value === index)
   );
 }
 
 function getJigsawBackgroundPosition(pieceIndex) {
-  const x = pieceIndex % 3;
-  const y = Math.floor(pieceIndex / 3);
-  return `${(x / 2) * 100}% ${(y / 2) * 100}%`;
+  const x = pieceIndex % 2;
+  const y = Math.floor(pieceIndex / 2);
+  return `${x * 100}% ${y * 100}%`;
 }
 
 function renderJigsawBoard() {
@@ -1609,6 +1602,7 @@ function renderJigsawBoard() {
       tile.classList.add("jigsaw-tile--solved");
     }
     tile.style.backgroundImage = `url("${minneapolisPuzzleImageSrc}")`;
+    tile.style.backgroundSize = "200% 200%";
     tile.style.backgroundPosition = getJigsawBackgroundPosition(pieceIndex);
     tile.setAttribute("aria-label", `Puzzle tile ${tileIndex + 1}`);
     tile.addEventListener("click", () => {

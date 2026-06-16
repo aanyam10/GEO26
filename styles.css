@@ -1065,9 +1065,9 @@ body.journey-started .hero-panel {
 
 .jigsaw-board {
   display: grid;
-  grid-template-columns: repeat(3, minmax(88px, 1fr));
+  grid-template-columns: repeat(2, minmax(112px, 1fr));
   gap: 10px;
-  max-width: 430px;
+  max-width: 300px;
 }
 
 .jigsaw-tile {
@@ -1076,7 +1076,7 @@ body.journey-started .hero-panel {
   border-radius: 18px;
   background-color: rgba(255, 251, 243, 0.92);
   background-repeat: no-repeat;
-  background-size: 300% 300%;
+  background-size: 200% 200%;
   box-shadow: 0 10px 22px rgba(73, 45, 14, 0.12);
   cursor: pointer;
   transition:
@@ -1341,7 +1341,7 @@ body.journey-started .hero-panel {
   }
 
   .jigsaw-board {
-    grid-template-columns: repeat(3, minmax(72px, 1fr));
+    grid-template-columns: repeat(2, minmax(96px, 1fr));
     gap: 8px;
   }
 }
