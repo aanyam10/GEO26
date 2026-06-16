@@ -31,6 +31,15 @@ pip install -r requirements.txt
 streamlit run streamlit_app.py
 ```
 
+If you want the Streamlit version to inject a different Google Maps key at runtime,
+set:
+
+```bash
+export GOOGLE_MAPS_KEY="YOUR_KEY_HERE"
+```
+
+before launching `streamlit run streamlit_app.py`.
+
 ## What is included
 
 - A paper-style landing screen with a `Begin` button

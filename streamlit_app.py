@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import base64
+import os
 from pathlib import Path
 
 import streamlit as st
@@ -38,11 +39,20 @@ def inline_assets(content: str) -> str:
 def build_html() -> str:
     html = (ROOT / "index.html").read_text(encoding="utf-8")
     css = (ROOT / "styles.css").read_text(encoding="utf-8")
-    config_js = (ROOT / "config.js").read_text(encoding="utf-8")
     app_js = (ROOT / "app.js").read_text(encoding="utf-8")
+    default_config_js = (ROOT / "config.js").read_text(encoding="utf-8")
 
     html = inline_assets(html)
     app_js = inline_assets(app_js)
+
+    streamlit_key = st.secrets.get("GOOGLE_MAPS_KEY", "").strip()
+    env_key = os.environ.get("GOOGLE_MAPS_KEY", "").strip()
+    maps_key = streamlit_key or env_key
+    config_js = (
+        f'window.GEO26_DEFAULT_MAPS_KEY = "{maps_key}";'
+        if maps_key
+        else default_config_js
+    )
 
     html = html.replace(
         '<link rel="stylesheet" href="styles.css?v=gm-demo-10" />',
@@ -61,10 +71,24 @@ def build_html() -> str:
 
 
 st.set_page_config(page_title="Geo 26", layout="wide")
-st.title("Geo 26 Prototype")
-st.caption(
-    "Streamlit wrapper for the immigration journey prototype. "
-    "Use the embedded app below."
+
+st.markdown(
+    """
+    <style>
+      .block-container {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        max-width: 1400px;
+      }
+      [data-testid="stHeader"] {
+        background: transparent;
+      }
+    </style>
+    """,
+    unsafe_allow_html=True,
 )
 
-components.html(build_html(), height=1700, scrolling=True)
+st.title("Geo 26")
+st.caption("Interactive Streamlit prototype of the immigration journey map.")
+
+components.html(build_html(), height=1850, scrolling=True)
