@@ -725,7 +725,7 @@ body.journey-started .hero-panel {
   pointer-events: none;
 }
 
-.image-card__art[data-theme="sherdi"] {
+.image-card__art[data-theme="gujarat"] {
   background:
     radial-gradient(circle at 78% 18%, rgba(255, 213, 123, 0.88), transparent 16%),
     linear-gradient(180deg, #d39a62 0%, #f2cf95 42%, #8bb6c3 44%, #628c98 100%);

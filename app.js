@@ -1,17 +1,17 @@
 const destinations = [
   {
-    id: "sherdi",
-    name: "Sherdi, Gujarat, India",
+    id: "gujarat",
+    name: "Gujarat, India",
     lat: 21.5847111,
     lng: 70.140275,
     zoom: 8,
-    theme: "sherdi",
+    theme: "gujarat",
     subtitle:
-      "The journey begins in Sherdi, Gujarat, where my dad was born and where this story starts.",
+      "The journey begins in Gujarat, India, where my dad was born and where this story starts.",
     imageSrc: "assets/gujarat-reference.png",
     imageAlt: "Laxmi Vilas Palace in Gujarat, India",
     imageHint: "Reference image",
-    imageLabel: "Laxmi Vilas Palace image for the Sherdi and Gujarat introduction.",
+    imageLabel: "Laxmi Vilas Palace image for the Gujarat introduction.",
     citation:
       "Pathak, Nanubhai, D., Lodrick, & O, D. (2026, May 31). Gujarat | History, Map, Population, & Facts. Encyclopedia Britannica. https://www.britannica.com/place/Gujarat",
     info:
@@ -19,7 +19,7 @@ const destinations = [
     footerNote: "Open the cricket memory to unlock the next destination.",
     activity: {
       kind: "cricket",
-      caption: "Play the cricket memory from Sherdi.",
+      caption: "Play the cricket memory from Gujarat.",
       openedNote: "Cricket memory opened. Continue when you're ready.",
       completedNote: "Cricket memory explored. Continue when you're ready.",
     },
@@ -138,7 +138,7 @@ const builtInMapsDemoKey =
 const minneapolisPuzzleImageSrc = "assets/minneapolis-puzzle-photo.png";
 const legacyDefaultNotesByKey = {
   "geo26-journey-state-v2": {
-    sherdi: {
+    gujarat: {
       citation:
         "Pathak, Nanubhai, D., Lodrick, & O, D. (2026, May 31). Gujarat | History, Map, Population, & Facts. Encyclopedia Britannica. https://www.britannica.com/place/Gujarat",
       info:
@@ -238,9 +238,6 @@ function createDefaultState() {
 }
 
 function resolveDestinationId(id) {
-  if (id === "gujarat") {
-    return "sherdi";
-  }
   return destinations.some((stop) => stop.id === id) ? id : "";
 }
 

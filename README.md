@@ -1,6 +1,6 @@
 # Geo 26
 
-Local prototype for a geography assignment web app about a dad's immigration journey from Sherdi, Gujarat to Marseille, London, Minneapolis, and Kitchener.
+Local prototype for a geography assignment web app about a dad's immigration journey from Gujarat, India to Marseille, London, Minneapolis, and Kitchener.
 
 ## Run locally
 
@@ -46,7 +46,7 @@ before launching `streamlit run streamlit_app.py`.
 - A Google Maps prototype mode that uses a free `Maps Demo Key`
 - Five destination stops with editable `Citation` and `Information` fields
 - Real image assets pulled from the current assignment PDF for Marseille, London, Minneapolis, and Kitchener
-- A doodle-style cricket minigame for Sherdi, Gujarat
+- A doodle-style cricket minigame for Gujarat, India
 - A 10-second cartoony dishwashing scene for Marseille
 - A London Eye POV activity for London
 - A simple jigsaw puzzle for Minneapolis using the daughter photo from the PDF
